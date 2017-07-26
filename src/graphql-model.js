@@ -1,4 +1,5 @@
-import {GraphQLObjectType,GraphQLList,GraphQLBoolean,GraphQLInt} from 'graphql'
+// This may be useful - but it is on hold, for now
+import {GraphQLObjectType,GraphQLInputObjectType,GraphQLList,GraphQLBoolean,GraphQLInt} from 'graphql'
 import {attributeFields, resolver, defaultArgs, defaultListArgs} from 'graphql-sequelize'
 
 const typeMaker = (model,config) => new GraphQLObjectType({
@@ -44,10 +45,10 @@ const queryMaker = (model, config) => {
                 attributeFields(model,{
                     exclude: ['id','createdAt','updatedAt']
                 }),
-                create && create.fields
+                create && create.fields()
             ),
             resolve: (root,args,context,info) => (
-                create && create.resolve(args) || model.create(args)
+                create && create.resolve(root,args,context,info) || model.create(args)
             )
         }
     }
@@ -100,7 +101,7 @@ const create = config => {
     config.type = typeMaker(config.model,config)
     let {queries,mutations} = queryMaker(config.model,config)
     return {
-        type:config.type, queries, mutations, model:config.model
+        type:config.type, queries, mutations, model:config.model, input: new GraphQLInputObjectType(config.type)
     }
 }
 

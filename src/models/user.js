@@ -9,7 +9,9 @@ const encryptPassword = password => bcrypt.hash(password,10)
 const attributes = {
     email: Sequelize.STRING,
     name: Sequelize.STRING,
-    password: Sequelize.STRING
+    password: Sequelize.STRING,
+    lastUpdatedBy: Sequelize.INTEGER,
+    createdBy: Sequelize.INTEGER,
 }
 // const methods =
 const options = {

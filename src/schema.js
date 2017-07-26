@@ -4,10 +4,12 @@ import {
     GraphQLInt,
     GraphQLFloat,
     GraphQLObjectType,
+    GraphQLInputObjectType,
     GraphQLSchema,
     GraphQLID,
     GraphQLNonNull,
-    GraphQLList
+    GraphQLList,
+    printSchema
 } from 'graphql'
 
 import db from './db.js'
@@ -26,12 +28,8 @@ const mutation = new GraphQLObjectType({
     fields: () => Object.assign({},...Object.keys(Models).map(name => Models[name].mutations))
 })
 
-db.query('SET FOREIGN_KEY_CHECKS = 0', {raw: true}).then(function(results) {
-   return db.sync({force:true})
-}).then(function(){
-    db.query('SET FOREIGN_KEY_CHECKS = 1',{raw: true})
-})
+const inputs = Object.assign({},...Object.keys(Models).map(name => Models[name].inputs))
 
 export default new GraphQLSchema({
-    query, mutation
+    query, mutation, inputs
 })
