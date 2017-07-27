@@ -33,9 +33,7 @@ Object.defineProperties(model,{
         get: () => model.hasOne(BillingInformation.model)
     },
     exams:{
-        get: () => model.hasMany(Exam.model,{
-            as: 'exams'
-        })
+        get: () => model.hasMany(Exam.model)
     }
 })
 
@@ -54,7 +52,7 @@ const fields = () => Object.assign(attributeFields(model),{
         resolve: resolver(model.billingInformation)
     },
     exams:{
-        type: Exam.type,
+        type: new GraphQLList(Exam.type),
         resolve: resolver(model.exams)
     }
 })
