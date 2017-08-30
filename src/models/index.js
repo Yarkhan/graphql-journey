@@ -1,7 +1,14 @@
-let models = require('require-dir')()
+var normalizedPath = require("path").join(__dirname);
 
-module.exports =  Object.assign(...Object.keys(models).map(name => {
-    let obj = {}
-    obj[name[0].toUpperCase()+name.substr(1)] = models[name].default
-    return obj
-}))
+let models = {}
+require("fs").readdirSync(normalizedPath).forEach(function(file) {
+  if(file == 'index.js') return
+  models[file.slice(0,-3)] = require('./'+file).default
+});
+
+for(let model in models){
+    models[model].associate(models)
+}
+
+// export {models}
+export default models

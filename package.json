@@ -1,37 +1,27 @@
 {
-    "dependencies": {
-        "apollo-resolvers": "^1.0.2",
-        "babel-cli": "^6.24.1",
-        "babel-preset-env": "^1.5.1",
-        "babel-preset-stage-3": "^6.24.1",
-        "bcrypt": "^1.0.2",
-        "debug": "^2.6.8",
-        "express": "^4.15.3",
-        "express-graphql": "^0.6.6",
-        "graphiql": "^0.10.2",
-        "graphql": "0.9.6",
-        "graphql-fields": "^1.0.2",
-        "graphql-relay": "^0.5.2",
-        "graphql-sequelize": "^5.3.2",
-        "json-stringify-safe": "^5.0.1",
-        "mysql": "^2.13.0",
-        "npm-watch": "^0.1.9",
-        "require-dir": "^0.3.2",
-        "sequelize": "^3.30.4"
-    },
-    "watch": {
-        "build": {
-            "patterns": "src/",
-            "extensions": "*"
-        },
-        "start": {
-            "patterns": "dist/",
-            "extensions": "*"
-        }
-    },
-    "scripts": {
-        "build": "babel src -d dist --copy-files",
-        "start": "node dist/main.js",
-        "dev": "rm -r dist && npm-watch"
-    }
+  "dependencies": {
+    "apollo-server-express": "^1.1.2",
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "glob": "^7.1.2",
+    "graphql": "^0.11.1",
+    "graphql-fields": "^1.0.2",
+    "graphql-relay": "^0.5.2",
+    "graphql-sequelize": "^5.4.2",
+    "graphql-tools": "^1.2.1",
+    "npm-watch": "^0.2.0",
+    "sequelize": "^4.7.5",
+    "sqlite3": "^3.1.9"
+  },
+  "scripts": {
+    "start": "babel-node src/main.js",
+    "dev": "npm-watch"
+  },
+  "watch": {
+    "start": "src/*"
+  }
 }

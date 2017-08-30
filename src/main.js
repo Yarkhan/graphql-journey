@@ -1,16 +1,23 @@
-import path from 'path'
-import express from 'express'
-import graphqlHTTP from 'express-graphql'
-import schema from './schema.js'
-var app = express();
-app.use('/graphql', graphqlHTTP((req,res)=>({
-    schema: schema,
-    graphiql: true
-})));
-app.listen(4000);
+
+import server from './server.js'
+// import Student from './models/student'
+// import Group from './models/group'
+import db from './db.js'
+//
+const startServer = ()=>{
+    server.listen(3000);
+    // Student.model.create({
+    //     firstName: 'Foo',
+    //     group:{
+    //         name: 'Fooa'
+    //     }
+    // },{
+    //     include: ['group']
+    // })
+
+}
+
+db.sync({force:false}).then(startServer)
 
 // import Models from './models'
-
-// console.log(
-//     Object.assign({},...Object.keys(Models).map(name => Models[name].queries))
-// )
+// console.log(Models)
